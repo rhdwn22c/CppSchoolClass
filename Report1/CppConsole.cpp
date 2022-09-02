@@ -37,9 +37,9 @@ int main() {
 
     int moneyResult, taxResult;
 
-    cout << "�����Աݾ� : ";
+    cout << "월납입금액 : ";
     cin >> bank.money;
-    cout << "��ǥ�Ⱓ : ";
+    cout << "적금기간 : ";
     cin >> bank.year;
 
     moneyResult = user.calculation(bank);
@@ -47,6 +47,6 @@ int main() {
     moneyResult += bank.money * bank.year;
     taxResult += bank.money * bank.year;
 
-    cout << "���ݽ� ���� :  " << moneyResult <<  endl;
-    cout << "���ݽ� ���� : " << taxResult << endl;
+    cout << "세전 :  " << moneyResult <<  endl;
+    cout << "세후 : " << taxResult << endl;
 }
