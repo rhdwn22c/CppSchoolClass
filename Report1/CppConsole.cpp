@@ -1,9 +1,6 @@
 #include <iostream>
 using namespace std;
 
-float taxPer = 0.154f;
-float yearInt = 0.0355f;
-
 class Bank {
 public:
     int money;
@@ -12,41 +9,41 @@ public:
 
 class BankUser {
 public:
-    int calculation(Bank bank);
-    int calculationTax(int moneyResult);
+    int cal(Bank bank);
+    int calTax(int monRes);
+
+    float taxPer = 15.4f;
+    float yearInt = 3.55f;
 };
 
-int BankUser :: calculation(Bank bank) {
-    int moneyResult;
-
-    moneyResult = bank.money * yearInt * (bank.year + 1) * bank.year / 2 / 12 - 5;
-    return moneyResult;
+int BankUser :: cal(Bank bank) {
+    int monRes;
+    monRes = bank.money * yearInt / 100 * (bank.year + 1) * bank.year / 2 / 12;
+    return monRes;
 }
 
-int BankUser :: calculationTax(int moneyResult) {
+int BankUser :: calTax(int monRes) {
     int taxRes;
-
-    taxRes = moneyResult - moneyResult * taxPer;
+    taxRes = monRes - monRes * taxPer / 100;
     return taxRes;
 }
 
-
 int main() {
+    int monRes, taxRes;
+
     BankUser user;
     Bank bank;
 
-    int moneyResult, taxResult;
-
-    cout << "월납입금액 : ";
     cin >> bank.money;
-    cout << "적금기간 : ";
     cin >> bank.year;
 
-    moneyResult = user.calculation(bank);
-    taxResult = user.calculationTax(moneyResult);
-    moneyResult += bank.money * bank.year;
-    taxResult += bank.money * bank.year;
+    monRes = user.cal(bank);
+    taxRes = user.calTax(monRes);
+    monRes += bank.money * bank.year;
+    taxRes += bank.money * bank.year;
 
-    cout << "세전 :  " << moneyResult <<  endl;
-    cout << "세후 : " << taxResult << endl;
+    cout << "세전 : " << monRes << endl;
+    cout << "세후 : " << taxRes;
+
+    return 0;
 }
