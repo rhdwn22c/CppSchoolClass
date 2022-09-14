@@ -36,11 +36,11 @@ int main() {
     BankUser user;
     Bank bank;
 
-    cout << "¾î¶² Àû±İÀ» °¡ÀÔÇÏ½Ã°Ú½À´Ï±î? (Æ¯ÆÇ : s, ÀÏ¹İ : n)";
+    cout << "ì–´ë–¤ ì ê¸ˆì„ ê°€ì…í•˜ì‹œê² ìŠµë‹ˆê¹Œ? (íŠ¹íŒ : s, ì¼ë°˜ : n)";
     cin >> whatSaving;
-    cout << "¾ó¸¶ ÀÔ±İÇÏ½Ã°Ú½À´Ï±î? : ";
+    cout << "ì–¼ë§ˆ ì…ê¸ˆí•˜ì‹œê² ìŠµë‹ˆê¹Œ? : ";
     cin >> bank.money;
-    cout << "¸î °³¿ù ÀÔ±İÇÏ½Ã°Ú½À´Ï±î? : ";
+    cout << "ëª‡ ê°œì›” ì…ê¸ˆí•˜ì‹œê² ìŠµë‹ˆê¹Œ? : ";
     cin >> bank.year;
 
     if (whatSaving == 's') {
@@ -53,8 +53,8 @@ int main() {
     monRes += bank.money * bank.year;
     taxRes += bank.money * bank.year;
 
-    cout << "¼¼Àü : " << monRes << endl;
-    cout << "¼¼ÈÄ : " << taxRes;
+    cout << "ì„¸ì „ : " << monRes << endl;
+    cout << "ì„¸í›„ : " << taxRes;
 
     return 0;
 }
