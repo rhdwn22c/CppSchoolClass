@@ -1,37 +1,37 @@
 #include <iostream>
 using namespace std;
+#define tax 0.0154f;
 
 class Bank {
-public:
-    int money;
-    int year;
-};
-
-class BankUser {
 public:
     int cal(Bank bank, float yearInt);
     int calTax(int monRes);
 
-    float taxPer = 15.4f;
-    float sYearInt = 4.0f;
-    float nYearInt = 3.0f;
+    int startMoney;
+    int calYear;
 };
 
-int BankUser::cal(Bank bank, float yearInt) {
-    int monRes;
-    monRes = bank.money * yearInt / 100 * (bank.year + 1) * bank.year / 2 / 12;
-    return monRes;
+class BankUser {
+public:
+    float specialYearInt = 4.0f;
+    float normalYearInt = 3.0f;
+};
+
+int Bank::cal(Bank bank, float yearInt) {
+    int moneyResult;
+    moneyResult = bank.startMoney * yearInt * (bank.calYear + 1) * bank.calYear / 2 / 12;
+    return moneyResult;
 }
 
-int BankUser::calTax(int monRes) {
-    int taxRes;
-    taxRes = monRes - monRes * taxPer / 100;
-    return taxRes;
+int Bank::calTax(int moneyResult) {
+    int taxResult;
+    taxResult = moneyResult - moneyResult * tax;
+    return taxResult;
 }
 
 int main() {
-    int monRes, taxRes;
-    int whatSaving;
+    int moneyResult, taxResult;
+    char whatSaving;
 
     BankUser user;
     Bank bank;
@@ -39,22 +39,22 @@ int main() {
     cout << "어떤 적금을 가입하시겠습니까? (특판 : s, 일반 : n)";
     cin >> whatSaving;
     cout << "얼마 입금하시겠습니까? : ";
-    cin >> bank.money;
+    cin >> bank.startMoney;
     cout << "몇 개월 입금하시겠습니까? : ";
-    cin >> bank.year;
+    cin >> bank.calYear;
 
     if (whatSaving == 's') {
-        monRes = user.cal(bank, user.sYearInt);
+        moneyResult = bank.cal(bank, user.specialYearInt);
     }
     else if (whatSaving == 'n') {
-        monRes = user.cal(bank, user.nYearInt);
+        moneyResult = bank.cal(bank, user.normalYearInt);
     }
-    taxRes = user.calTax(monRes);
-    monRes += bank.money * bank.year;
-    taxRes += bank.money * bank.year;
+    taxResult = bank.calTax(moneyResult);
+    moneyResult += bank.startMoney * bank.calYear;
+    taxResult += bank.startMoney * bank.calYear;
 
-    cout << "세전 : " << monRes << endl;
-    cout << "세후 : " << taxRes;
+    cout << "세전 : " << moneyResult << endl;
+    cout << "세후 : " << taxResult;
 
     return 0;
 }
