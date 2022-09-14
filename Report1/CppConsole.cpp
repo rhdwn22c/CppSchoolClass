@@ -3,8 +3,8 @@ using namespace std;
 
 class Bank {
 public:
-    int startMoney;
-    int calYear;
+    int initialMoney;
+    int savingMonth;
 };
 
 class BankUser {
@@ -18,7 +18,7 @@ public:
 
 int BankUser :: cal(Bank bank) {
     int monRes;
-    monRes = bank.startMoney * yearInt / 100 * (bank.calYear + 1) * bank.calYear / 2 / 12;
+    monRes = bank.initialMoney * yearInt / 100 * (bank.savingMonth + 1) * bank.savingMonth / 2 / 12;
     return monRes;
 }
 
@@ -34,13 +34,13 @@ int main() {
     BankUser user;
     Bank bank;
 
-    cin >> bank.startMoney;
-    cin >> bank.calYear;
+    cin >> bank.initialMoney;
+    cin >> bank.savingMonth;
 
     monRes = user.cal(bank);
     taxRes = user.calTax(monRes);
-    monRes += bank.startMoney * bank.calYear;
-    taxRes += bank.startMoney * bank.calYear;
+    monRes += bank.initialMoney * bank.savingMonth;
+    taxRes += bank.initialMoney * bank.savingMonth;
 
     cout << "세전 : " << monRes << endl;
     cout << "세후 : " << taxRes;
