@@ -1,71 +1,76 @@
 #include <iostream>
 using namespace std;
-#define tax 0.154f;
+
+const float taxPer = 0.154f;
+const float savingInterest = 0.04f;
+const float depositInterest = 0.03f;
+
 class User
 {
 public:
-    string name = "";
     int id = 0;
+    string* name = new string();
+
+    int initialMoney = 0;
+    int savingMonth = 0;
+
+    void UserBank(const User& rhs) {
+        initialMoney = rhs.initialMoney;
+        savingMonth = rhs.savingMonth;
+    }
 };
 
 class Bank
 {
 public:
-    User* user = new User[50];
-    
-    int cal(Bank bank, float yearInterest);
-    int calTax(int moneyResult);
+    int SavingCal(User user);
+    int DepositCal(User user);
 
-    int initialMoney;
-    int savingMonth;
-
-    float savingInterest = 4.0f;
-    float depositInterest = 3.0f;
 };
 
-int Bank::cal(Bank bank, float yearInterest)
+int Bank::SavingCal(User user)
 {
-    int noneTaxMoneyResult;
-    noneTaxMoneyResult = bank.initialMoney * yearInterest * (bank.savingMonth + 1) * bank.savingMonth / 2 / 12;
-    return noneTaxMoneyResult;
+    int taxMoneyResult = 0;
+    taxMoneyResult = user.initialMoney * savingInterest * (user.savingMonth + 1) * user.savingMonth / 24;
+    taxMoneyResult = taxMoneyResult - taxMoneyResult * taxPer;
+    return taxMoneyResult;
 }
 
-int Bank::calTax(int moneyResult)
+int Bank::DepositCal(User user)
 {
     int taxMoneyResult;
-    taxMoneyResult = moneyResult - moneyResult * tax;
+    taxMoneyResult = user.initialMoney * depositInterest - ((user.initialMoney * depositInterest) * taxPer);
     return taxMoneyResult;
 }
 
 int main()
 {
-    int noneTaxMoneyResult, taxMoneyResult;
-    int whatSaving;
+    int savingMoneyResult = 0;
+    int depositMoneyResult = 0;
+    string name;
+    int id;
 
+    User user;
     Bank bank;
 
-    cout << "적금 하시겠습니까, 예금 하시겠습니까? (적금 : 1 / 예금 : 2)";
-    cin >> whatSaving;
-    cout << "얼마 입금하시겠습니까? : ";
-    cin >> bank.initialMoney;
-    cout << "몇 개월 입금하시겠습니까? : ";
-    cin >> bank.savingMonth;
+    cout << "아이디를 입력해주세요 : ";
+    cin >> id;
+    cout << "이름을 입력해주세요 : ";
+    cin >> name;
+    cout << "돈을 얼마 넣으시겠습니까? : ";
+    cin >> user.initialMoney;
+    cout << "몇 개월 동안 넣으시겠습니까? : ";
+    cin >> user.savingMonth;
 
-    if (whatSaving == '1')
-    {
-        noneTaxMoneyResult = bank.cal(bank, bank.savingInterest);
-    }
-    else if (whatSaving == '2')
-    {
-        noneTaxMoneyResult = bank.cal(bank, bank.depositInterest);
-    }
+    user.UserBank(user);
 
-    taxMoneyResult = bank.calTax(noneTaxMoneyResult);
-    noneTaxMoneyResult += bank.initialMoney * bank.savingMonth;
-    taxMoneyResult += bank.initialMoney * bank.savingMonth;
-
-    cout << "세전 : " << noneTaxMoneyResult << endl;
-    cout << "세후 : " << taxMoneyResult;
+    savingMoneyResult = bank.SavingCal(user);
+    savingMoneyResult += user.initialMoney * user.savingMonth;
+    depositMoneyResult = user.initialMoney + bank.DepositCal(user);
+    cout << id << " / " << name << endl;
+    cout << "적금 : " << savingMoneyResult << endl;
+    cout << "예금 : " << depositMoneyResult;
+   
 
     return 0;
 }
