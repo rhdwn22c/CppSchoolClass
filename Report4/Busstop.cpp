@@ -81,9 +81,9 @@ public:
 };
 
 int main() {
-	NowTime time;
+	NowTime nowTime;
 	GetOutTime getOutTime;
 
-	time.SetTime();
-	getOutTime.GetOutTimeToBus(time.walkHour, time.walkMinute);
+	nowTime.SetTime();
+	getOutTime.GetOutTimeToBus(nowTime.walkHour, nowTime.walkMinute);
 }
