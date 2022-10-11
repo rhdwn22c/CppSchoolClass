@@ -15,6 +15,9 @@ public:
 	int walkHour;
 	int walkMinute;
 
+	time_t nowWalkTime; // time_t 타입 선언
+	struct tm pWalkTime; // tm 구조체 선언
+
 	void SetTime() {
 		nowWalkTime = time(NULL);
 		localtime_s(&pWalkTime, &nowWalkTime); // 현재 시간 계산해 주기 (localtime은 VS에서 에러뜨기때문에 localtime_s로 사용)
@@ -30,29 +33,10 @@ public:
 		}
 	}
 
-private:
-	time_t nowWalkTime; // time_t 타입 선언
-	struct tm pWalkTime; // tm 구조체 선언
 };
 
 class GetOutTime {
 public:
-	void GetOutTimeToBus(int walkHour, int walkMinute) { // 나가야 할 시간 구하기
-		getOutWalkHour = walkHour;
-		getOutWalkMinute = walkMinute;
-
-		if (getOutWalkHour < FirstBusTime || getOutWalkHour > LastBusTime) {
-			cout << "6 : 13 A.M에 출발" << endl; // 초 계산 X
-		}
-		else if (getOutWalkHour > 12) {
-			cout << getOutWalkHour - 12 << " : " << ToArriveGetOutArrange(walkMinute) << " P.M" << "에 출발 ";
-		}
-		else {
-			cout << getOutWalkHour << " : " << ToArriveGetOutArrange(walkMinute) << " A.M" << "에 출발 ";
-		}
-	}
-
-private:
 	NowTime nowTime;
 
 	int getOutWalkHour;
@@ -78,6 +62,22 @@ private:
 			return walkMinute - arriveBusstopTime;
 		}
 	}
+
+	void GetOutTimeToBus(int walkHour, int walkMinute) { // 나가야 할 시간 구하기
+		getOutWalkHour = walkHour;
+		getOutWalkMinute = walkMinute;
+
+		if (getOutWalkHour < FirstBusTime || getOutWalkHour > LastBusTime) {
+			cout << "6 : 13 A.M에 출발" << endl; // 초 계산 X
+		}
+		else if (getOutWalkHour > 12) {
+			cout << getOutWalkHour - 12 << " : " << ToArriveGetOutArrange(walkMinute) << " P.M" << "에 출발 ";
+		}
+		else {
+			cout << getOutWalkHour << " : " << ToArriveGetOutArrange(walkMinute) << " A.M" << "에 출발 ";
+		}
+	}
+
 };
 
 int main() {
