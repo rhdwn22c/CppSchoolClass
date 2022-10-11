@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "bit": "cpp",
+        "ctime": "cpp",
+        "limits": "cpp",
+        "xlocale": "cpp",
+        "xlocinfo": "cpp"
     }
 }

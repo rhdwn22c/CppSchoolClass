@@ -10,7 +10,7 @@ const int BusTimeInterval = 20; // minute
 const int WithinReach = 4; // km/h
 
 
-class Time { // 시간 계산
+class NowTime { // 시간 계산
 public:
 	int walkHour;
 	int walkMinute;
@@ -35,9 +35,9 @@ private:
 	struct tm pWalkTime; // tm 구조체 선언
 };
 
-class CntTime {
+class GetOutTime {
 public:
-	void GetOutTime(int walkHour, int walkMinute) { // 나가야 할 시간 구하기
+	void GetOutTimeToBus(int walkHour, int walkMinute) { // 나가야 할 시간 구하기
 		getOutWalkHour = walkHour;
 		getOutWalkMinute = walkMinute;
 
@@ -53,7 +53,7 @@ public:
 	}
 
 private:
-	Time time;
+	NowTime nowTime;
 
 	int getOutWalkHour;
 	int getOutWalkMinute;
@@ -81,9 +81,9 @@ private:
 };
 
 int main() {
-	Time time;
-	CntTime cntTime;
+	NowTime time;
+	GetOutTime getOutTime;
 
 	time.SetTime();
-	cntTime.GetOutTime(time.walkHour, time.walkMinute);
+	getOutTime.GetOutTimeToBus(time.walkHour, time.walkMinute);
 }
