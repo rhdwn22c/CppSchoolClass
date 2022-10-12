@@ -5,6 +5,7 @@
         "ctime": "cpp",
         "limits": "cpp",
         "xlocale": "cpp",
-        "xlocinfo": "cpp"
+        "xlocinfo": "cpp",
+        "ostream": "cpp"
     }
 }
