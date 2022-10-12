@@ -33,11 +33,6 @@ int main() {
 
 	cout << "연봉이 얼마인가요? : ";
 	cin >> money;
-    
-	cout << insurance.NationalPensionCalculate(money) << endl;
-	cout << insurance.HealthInsuranceCalculate(money) << endl;
-	cout << insurance.LongTermCareInsuranceCalculate(money) << endl;
-	cout << insurance.EmploymentInsuranceCalculate(money) << endl;
 
 	money = (money / YEAR) - insurance.NationalPensionCalculate(money) - insurance.HealthInsuranceCalculate(money) - insurance.LongTermCareInsuranceCalculate(money) - insurance.EmploymentInsuranceCalculate(money);
 	
