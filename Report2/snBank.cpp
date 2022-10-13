@@ -1,60 +1,60 @@
 #include <iostream>
 using namespace std;
-#define tax 0.154f;
 
 class Bank {
 public:
-    int cal(Bank bank, float yearInterest);
-    int calTax(int moneyResult);
-
-    int initialMoney;
-    int savingMonth;
+    int money;
+    int year;
 };
 
 class BankUser {
 public:
-    float savingInterest = 4.0f;
-    float depositInterest = 3.0f;
+    int cal(Bank bank, float yearInt);
+    int calTax(int monRes);
+
+    float taxPer = 0.154f;
+    float sYearInt = 0.04f;
+    float nYearInt = 0.03f;
 };
 
-int Bank::cal(Bank bank, float yearInterest) {
-    int noneTaxMoneyResult;
-    noneTaxMoneyResult = bank.initialMoney * yearInterest * (bank.savingMonth + 1) * bank.savingMonth / 2 / 12;
-    return noneTaxMoneyResult;
+int BankUser::cal(Bank bank, float yearInt) {
+    int monRes;
+    monRes = bank.money * yearInt * (bank.year + 1) * bank.year / 2 / 12;
+    return monRes;
 }
 
-int Bank::calTax(int moneyResult) {
-    int taxMoneyResult;
-    taxMoneyResult = moneyResult - moneyResult * tax;
-    return taxMoneyResult;
+int BankUser::calTax(int monRes) {
+    int taxRes;
+    taxRes = monRes - monRes * taxPer;
+    return taxRes;
 }
 
 int main() {
-    int noneTaxMoneyResult, taxMoneyResult;
-    int whatSaving;
+    int monRes = 0, taxRes = 0;
+    char whatSaving;
 
-    BankUser bankUser;
+    BankUser user;
     Bank bank;
 
-    cout << "어떤 적금을 가입하시겠습니까? (특판 : 1, 일반 : 2)";
+    cout << "어떤 적금을 가입하시겠습니까? (특판 : s, 일반 : n)";
     cin >> whatSaving;
     cout << "얼마 입금하시겠습니까? : ";
-    cin >> bank.initialMoney;
+    cin >> bank.money;
     cout << "몇 개월 입금하시겠습니까? : ";
-    cin >> bank.savingMonth;
+    cin >> bank.year;
 
-    if (whatSaving == '1') {
-        noneTaxMoneyResult = bank.cal(bank, bankUser.savingInterest);
+    if (whatSaving == 's') {
+        monRes = user.cal(bank, user.sYearInt);
     }
-    else if (whatSaving == '2') {
-        noneTaxMoneyResult = bank.cal(bank, bankUser.depositInterest);
+    else if (whatSaving == 'n') {
+        monRes = user.cal(bank, user.nYearInt);
     }
-    taxMoneyResult = bank.calTax(noneTaxMoneyResult);
-    noneTaxMoneyResult += bank.initialMoney * bank.savingMonth;
-    taxMoneyResult += bank.initialMoney * bank.savingMonth;
+    taxRes = user.calTax(monRes);
+    monRes += bank.money * bank.year;
+    taxRes += bank.money * bank.year;
 
-    cout << "세전 : " << noneTaxMoneyResult << endl;
-    cout << "세후 : " << taxMoneyResult;
+    cout << "세전 : " << monRes << endl;
+    cout << "세후 : " << taxRes;
 
     return 0;
 }
